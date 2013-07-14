@@ -24,8 +24,9 @@ from spacepaste.controllers import get_controller
 class SpacePaste(object):
     """The WSGI Application"""
 
-    def __init__(self, dburi, secret_key):
+    def __init__(self, dburi, secret_key, pastes_private):
         self.secret_key = secret_key
+        self.pastes_private = pastes_private
 
         #: bind metadata, create engine and create all tables
         self.engine = engine = create_engine(dburi, convert_unicode=True, encoding="utf-8", use_native_unicode=False)
@@ -70,10 +71,10 @@ class SpacePaste(object):
                                self.cleanup_callbacks)
 
 
-def make_app(dburi, secret_key, debug=False, shell=False):
+def make_app(dburi, secret_key, debug=False, shell=False, pastes_private=False):
     """Apply the used middlewares and create the application."""
     static_path = os.path.join(os.path.dirname(__file__), 'static')
-    app = SpacePaste(dburi, secret_key)
+    app = SpacePaste(dburi, secret_key, pastes_private)
     if debug:
         app.engine.echo = True
     app.bind_to_context()
