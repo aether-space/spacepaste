@@ -17,7 +17,7 @@ h1 {
     padding: .25em 1em;
 }
 
-h1 a { 
+h1 a {
     color: #fff;
     text-decoration: none;
 }
@@ -271,4 +271,11 @@ table.diff tr.add td.code ins {
 table.diff tr.del td.code del {
     background-color: #e99;
     text-decoration: none;
+}
+
+div.multi p.filename {
+    background: #777;
+    color: white;
+    padding: 5px 10px;
+    margin: 0;
 }
