@@ -31,9 +31,11 @@
     {%- endfor %}
     </select>
     <input type="text" value="" name="webpage" id="webpage">
-    <input type="checkbox" name="private" id="private"{% if private
-      %} checked{% endif %}> <label for="private">{% trans
-      %}Make this paste a private paste{% endtrans %}</label>
+    {% if private != 'always' -%}
+      <input type="checkbox" name="private" id="private"{% if private
+        %} checked{% endif %}> <label for="private">{% trans
+        %}Make this paste a private paste{% endtrans %}</label>
+    {%- endif %}
     <span id="insert_tabs">
       <input type="checkbox" id="insert_tabs_input">
       <label for="insert_tabs_input">{% trans

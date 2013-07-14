@@ -23,7 +23,7 @@ from spacepaste.lib.captcha import check_hashed_solution, Captcha
 
 def coalesce_private(default, non_default):
     if default == 'always':
-        return True
+        return 'always'
     return non_default or default
 
 
@@ -38,7 +38,7 @@ class PasteController(object):
 
         code = error = ''
         show_captcha = False
-        private = bool(local.application.pastes_private)
+        private = local.application.pastes_private
         parent = None
         req = local.request
         getform = req.form.get
@@ -64,7 +64,7 @@ class PasteController(object):
                 show_captcha = True
             if code and language and not error:
                 private = coalesce_private(private, 'private' in req.form)
-                paste = Paste(code, language, parent, None, private)
+                paste = Paste(code, language, parent, None, bool(private))
                 db.session.add(paste)
                 db.session.commit()
                 return redirect(paste.url)
