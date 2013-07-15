@@ -60,6 +60,22 @@ _section_marker_re = re.compile(r'^(?<!\\)###\s*(.*?)(?:\[(.+?)\])?\s*$(?m)')
 _escaped_marker = re.compile(r'^\\(?=###)(?m)')
 
 
+class OrderedListHtmlFormatter(HtmlFormatter):
+    def wrap(self, source, outfile):
+        yield (0, '<ol>')
+        yield (0, '<li class="spacer">&nbsp;</li>')
+        line_count = self.linenostart
+        for is_line, line in source:
+            if is_line:
+                if line_count % self.linenostep == 0:
+                    line = '<li value="%d" class="%s"><span>%s</span></li>' % (
+                        line_count, self.cssclass, line)
+                line_count += 1
+            yield (is_line, line)
+        yield (0, '<li class="spacer">&nbsp;</li>')
+        yield (0, '</ol>')
+
+
 def highlight(code, language, _preview=False, _linenos=True):
     """Highlight a given code to HTML."""
     if not _preview:
@@ -83,7 +99,8 @@ def highlight(code, language, _preview=False, _linenos=True):
         except ClassNotFound:
             lexer = TextLexer()
     style = get_style(name_only=True)
-    formatter = HtmlFormatter(linenos=_linenos, cssclass='syntax', style=style)
+    formatter_class = OrderedListHtmlFormatter if _linenos else HtmlFormatter
+    formatter = formatter_class(cssclass='syntax', style=style)
     return u'<div class="code">%s</div>' % \
            pygments.highlight(code, lexer, formatter)
 
