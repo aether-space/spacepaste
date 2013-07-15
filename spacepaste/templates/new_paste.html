@@ -14,7 +14,6 @@
           <input type="text" name="captcha" size="20">
         </div>
         {%- else %}
-        <p><a href="javascript:LodgeIt.hideNotification()">{% trans %}hide this message{% endtrans %}</a></p>
         {%- endif %}
       </div>
     {%- endif %}
@@ -36,10 +35,5 @@
         %} checked{% endif %}> <label for="private">{% trans
         %}Make this paste a private paste{% endtrans %}</label>
     {%- endif %}
-    <span id="insert_tabs">
-      <input type="checkbox" id="insert_tabs_input">
-      <label for="insert_tabs_input">{% trans
-        %}Tab-key inserts tabstops{% endtrans %}</label>
-    </span>
   </form>
 {% endblock %}
