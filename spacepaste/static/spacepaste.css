@@ -128,6 +128,7 @@ p.notice {
 #paste div.code {
     background: #fff;
     padding: 5px;
+    overflow-x: auto;
 }
 
 #paste td.code {
@@ -302,6 +303,10 @@ li.syntax, li.spacer {
     white-space: pre-wrap;
     margin-left: 5em;
     padding: 0 0.5em;
+}
+
+#paste.nowrap li.syntax {
+    white-space: pre;
 }
 
 li.syntax {

@@ -6,7 +6,8 @@
     <h2>{% trans %}Paste details{% endtrans %}</h2>
     <div class="quick">
       <p><a href="/?reply_to={{ paste.identifier }}">{% trans %}reply{% endtrans %}</a> |
-         <a href="/raw/{{ paste.identifier }}/">{% trans %}raw{% endtrans %}</a></p>
+         <a href="/raw/{{ paste.identifier }}/">{% trans %}raw{% endtrans %}</a>
+         <span id="wrap-toggle-zone"></span></p>
     </div>
   </div>
   <div id="paste" class="lang-{{ paste.language }} code{% if not linenos %} nolinenos{% endif %}">
