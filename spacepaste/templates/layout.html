@@ -18,7 +18,6 @@
           <ul id="navigation">
           {%- for href, id, caption in [
             ('/', 'new', _('new')),
-            ('/all/', 'all pastes', _('all pastes')),
           ] %}
             <li{% if active_page == id %} class="active"{% endif %}>
               <a href="{{ href|e }}">{{ caption|e }}</a>
@@ -36,7 +35,7 @@
            {% block body %}{% endblock -%}
             <div class="footer">
                 Powered by <a href="http://buffer.io/+spacepaste/">spacepaste</a>.
-	        <a href="/removal/">Paste removal</a>.	
+	        <a href="/removal/">Paste removal</a>.
             </div>
           </div>
       </div>
