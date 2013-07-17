@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/static/spacepaste.css" type="text/css">
     <link rel="stylesheet" href="/static/print.css" type="text/css" media="print">
     <script type="text/javascript" src="/static/jquery-1.5.1.min.js"></script>
+    <script type="text/javascript" src="/static/spacepaste.js"></script>
     {%- if css %}
     <style type="text/css">
       {{ css|e }}
@@ -18,7 +19,6 @@
           <ul id="navigation">
           {%- for href, id, caption in [
             ('/', 'new', _('new')),
-            ('/all/', 'all pastes', _('all pastes')),
           ] %}
             <li{% if active_page == id %} class="active"{% endif %}>
               <a href="{{ href|e }}">{{ caption|e }}</a>
@@ -36,7 +36,7 @@
            {% block body %}{% endblock -%}
             <div class="footer">
                 Powered by <a href="http://buffer.io/+spacepaste/">spacepaste</a>.
-	        <a href="/removal/">Paste removal</a>.	
+	        <a href="/removal/">Paste removal</a>.
             </div>
           </div>
       </div>

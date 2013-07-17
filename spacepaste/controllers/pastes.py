@@ -21,6 +21,12 @@ from spacepaste.lib.pagination import generate_pagination
 from spacepaste.lib.captcha import check_hashed_solution, Captcha
 
 
+def coalesce_private(default, non_default):
+    if default == 'always':
+        return 'always'
+    return non_default or default
+
+
 class PasteController(object):
     """Provides all the handler callback for paste related stuff."""
 
@@ -31,7 +37,8 @@ class PasteController(object):
             language = 'text'
 
         code = error = ''
-        show_captcha = private = False
+        show_captcha = False
+        private = local.application.pastes_private
         parent = None
         req = local.request
         getform = req.form.get
@@ -56,8 +63,8 @@ class PasteController(object):
                                   'CAPTCHA solution was incorrect')
                 show_captcha = True
             if code and language and not error:
-                paste = Paste(code, language, parent, None,
-                              'private' in req.form)
+                private = coalesce_private(private, 'private' in req.form)
+                paste = Paste(code, language, parent, None, bool(private))
                 db.session.add(paste)
                 db.session.commit()
                 return redirect(paste.url)
@@ -69,7 +76,7 @@ class PasteController(object):
                 if parent is not None:
                     code = parent.code
                     language = parent.language
-                    private = parent.private
+                    private = coalesce_private(private, parent.private)
 
         return render_to_response('new_paste.html',
             languages=list_languages(),

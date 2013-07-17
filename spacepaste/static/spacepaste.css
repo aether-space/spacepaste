@@ -17,7 +17,7 @@ h1 {
     padding: .25em 1em;
 }
 
-h1 a { 
+h1 a {
     color: #fff;
     text-decoration: none;
 }
@@ -128,6 +128,7 @@ p.notice {
 #paste div.code {
     background: #fff;
     padding: 5px;
+    overflow-x: auto;
 }
 
 #paste td.code {
@@ -135,7 +136,7 @@ p.notice {
 }
 
 #paste div.syntax,
-.paste_list pre.syntax {
+.paste_list li.syntax {
     background: #fff;
 }
 
@@ -271,4 +272,47 @@ table.diff tr.add td.code ins {
 table.diff tr.del td.code del {
     background-color: #e99;
     text-decoration: none;
+}
+
+div.multi p.filename {
+    background: #777;
+    color: white;
+    padding: 5px 10px;
+    margin: 10px 0 0;
+}
+
+.code ol {
+    background: #333;
+    color: #fff;
+    margin: 0.2em;
+}
+
+li.syntax span {
+    color: #000;
+}
+
+li.spacer {
+    list-style: none;
+    margin-left: 5em;
+    background: #fff;
+}
+
+li.syntax, li.spacer {
+    background: #fff;
+    font-family: monospace;
+    white-space: pre-wrap;
+    margin-left: 5em;
+    padding: 0 0.5em;
+}
+
+#paste.nowrap li.syntax {
+    white-space: pre;
+}
+
+li.syntax {
+    list-style: decimal;
+}
+
+li.spacer {
+    line-height: 0.5em;
 }

@@ -9,6 +9,7 @@
     :license: BSD.
 """
 import inspect
+from spacepaste import local
 from spacepaste.models import Paste
 from spacepaste.database import db
 from spacepaste.lib.xmlrpc import XMLRPCRequestHandler
@@ -77,7 +78,8 @@ def pastes_new_paste(language, code, parent_id=None,
         if parent is None:
             raise ValueError('parent paste not found')
 
-    paste = Paste(code, language, parent, private=private)
+    paste = Paste(code, language, parent,
+                  private=private or local.application.pastes_private)
     db.session.add(paste)
     db.session.commit()
     return paste.identifier
